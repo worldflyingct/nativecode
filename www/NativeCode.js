@@ -5,7 +5,7 @@ exports.coolMethod = function (arg0, success, error) {
 };
 
 exports.duyun = {
-    startaudio: function (arg0, success, error) {
+    startaudio: function (arg0) {
         return new primise (function (resolve, reject) {
             exec(function (res) {
                 resolve (res)
@@ -14,13 +14,13 @@ exports.duyun = {
             }, 'NativeCode', 'duyun.startaudio', [arg0]);
         })
     },
-    stopaudio: function (arg0, success, error) {
+    stopaudio: function () {
         return new primise (function (resolve, reject) {
             exec(function (res) {
                 resolve (res)
             }, function (err) {
                 reject (err)
-            }, 'NativeCode', 'duyun.stopaudio', [arg0]);
+            }, 'NativeCode', 'duyun.stopaudio', []);
         })
     }
 };
