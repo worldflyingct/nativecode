@@ -12,6 +12,12 @@
         </config-file>
         <config-file parent="/*" target="AndroidManifest.xml" />
         <source-file src="src/android/NativeCode.java" target-dir="src/cn/worldflying/cordovaplugin/NativeCode" />
+        <source-file src="src/android/duyun/NativeSupport.java" target-dir="src/com/unisec/talkback" />
+        <source-file src="src/android/duyun/Talkback.java" target-dir="src/com/unisec/talkback" />
+        <source-file src="src/android/duyun/libs/arm64-v8a/libTalkback.so" target-dir="libs/arm64-v8a" />
+        <source-file src="src/android/duyun/libs/armeabi-v7a/libTalkback.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="src/android/duyun/libs/x86/libTalkback.so" target-dir="libs/x86" />
+        <source-file src="src/android/duyun/libs/x86_64/libTalkback.so" target-dir="libs/x86_64" />
     </platform>
     <platform name="ios">
         <config-file parent="/*" target="config.xml">
