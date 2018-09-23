@@ -24,7 +24,12 @@ public class NativeCode extends CordovaPlugin {
             return true;
         } else if (action.equals("duyun.startaudio")) {
             if (talkback == null) {
-                talkback = new Talkback(address);
+                String address = args.getString(0);
+                try {
+                    talkback = new Talkback(address);
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
                 if (talkback.openAudioDevice()) {
                     JSONObject obj = new JSONObject();
                     obj.put("errcode", 0);

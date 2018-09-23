@@ -6,9 +6,21 @@ exports.coolMethod = function (arg0, success, error) {
 
 exports.duyun = {
     startaudio: function (arg0, success, error) {
-        exec(success, error, 'NativeCode', 'duyun.startaudio', [arg0]);
+        return new primise (function (resolve, reject) {
+            exec(function (res) {
+                resolve (res)
+            }, function (err) {
+                reject (err)
+            }, 'NativeCode', 'duyun.startaudio', [arg0]);
+        })
     },
     stopaudio: function (arg0, success, error) {
-        exec(success, error, 'NativeCode', 'duyun.stopaudio', [arg0]);
+        return new primise (function (resolve, reject) {
+            exec(function (res) {
+                resolve (res)
+            }, function (err) {
+                reject (err)
+            }, 'NativeCode', 'duyun.stopaudio', [arg0]);
+        })
     }
 };
