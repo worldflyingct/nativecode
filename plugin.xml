@@ -10,11 +10,16 @@
                 <param name="android-package" value="cn.worldflying.cordovaplugin.NativeCode" />
             </feature>
         </config-file>
-        <config-file parent="/*" target="AndroidManifest.xml" />
-        <source-file src="src/android/NativeCode.java" target-dir="src/cn/worldflying/cordovaplugin/NativeCode" />
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.RECORD_AUDIO" />
+        </config-file>
+        <source-file src="src/android/NativeCode.java" target-dir="src/cn/worldflying/cordovaplugin" />
         <source-file src="src/android/duyun/NativeSupport.java" target-dir="src/com/unisec/talkback" />
         <source-file src="src/android/duyun/Talkback.java" target-dir="src/com/unisec/talkback" />
-        <lib-file src="src/android/duyun/libs/armeabi-v7a/libTalkback.so" arch="device" />
+        <resource-file src="src/android/duyun/libs/armeabi-v7a/libTalkback.so" target="jniLibs/armeabi-v7a/libTalkback.so"/>
+        <resource-file src="src/android/duyun/libs/arm64-v8a/libTalkback.so" target="jniLibs/arm64-v8a/libTalkback.so"/>
+        <resource-file src="src/android/duyun/libs/x86/libTalkback.so" target="jniLibs/x86/libTalkback.so"/>
+        <resource-file src="src/android/duyun/libs/x86_64/libTalkback.so" target="jniLibs/x86_64/libTalkback.so"/>
     </platform>
     <platform name="ios">
         <config-file parent="/*" target="config.xml">

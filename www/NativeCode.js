@@ -6,7 +6,7 @@ exports.coolMethod = function (arg0, success, error) {
 
 exports.duyun = {
     startaudio: function (arg0) {
-        return new primise (function (resolve, reject) {
+        return new Promise (function (resolve, reject) {
             exec(function (res) {
                 resolve (res)
             }, function (err) {
@@ -15,7 +15,7 @@ exports.duyun = {
         })
     },
     stopaudio: function () {
-        return new primise (function (resolve, reject) {
+        return new Promise (function (resolve, reject) {
             exec(function (res) {
                 resolve (res)
             }, function (err) {

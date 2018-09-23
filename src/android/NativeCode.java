@@ -7,7 +7,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.Manifest;
+
 import com.unisec.talkback.Talkback;
+
+/*
+import android.content.Context;
+import android.widget.Toast;
+
+Context Activity = this.cordova.getActivity().getApplicationContext();
+Toast.makeText(Activity, "I am debug message", Toast.LENGTH_LONG).show();
+*/
 
 /**
  * This class echoes a string called from JavaScript.
@@ -24,22 +34,27 @@ public class NativeCode extends CordovaPlugin {
             return true;
         } else if (action.equals("duyun.startaudio")) {
             if (talkback == null) {
-                String address = args.getString(0);
-                try {
-                    talkback = new Talkback(address);
-                } catch(Exception e) {
-                    e.printStackTrace();
-                }
-                if (talkback.openAudioDevice()) {
-                    JSONObject obj = new JSONObject();
-                    obj.put("errcode", 0);
-                    obj.put("errmsg", "start success");
-                    callbackContext.success(obj);
+                if (this.cordova.hasPermission(Manifest.permission.RECORD_AUDIO)) {
+                    String address = args.getString(0);
+                    try {
+                        talkback = new Talkback(address);
+                    } catch(Exception e) {
+                        callbackContext.error(e.toString());
+                        return false;
+                    }
+                    if (talkback.openAudioDevice()) {
+                        JSONObject obj = new JSONObject();
+                        obj.put("errcode", 0);
+                        obj.put("errmsg", "start success");
+                        callbackContext.success(obj);
+                    } else {
+                        JSONObject obj = new JSONObject();
+                        obj.put("errcode", -1);
+                        obj.put("errmsg", "start fail");
+                        callbackContext.error(obj);
+                    }
                 } else {
-                    JSONObject obj = new JSONObject();
-                    obj.put("errcode", -1);
-                    obj.put("errmsg", "start fail");
-                    callbackContext.error(obj);
+                    this.cordova.requestPermission(this, 0, Manifest.permission.RECORD_AUDIO);
                 }
             } else {
                 JSONObject obj = new JSONObject();
@@ -50,7 +65,7 @@ public class NativeCode extends CordovaPlugin {
             return true;
         } else if (action.equals("duyun.stopaudio")) {
             if (talkback != null) {
-                talkback.closeAudioOutput ();
+                talkback.closeAudioDevice ();
                 talkback = null;
                 JSONObject obj = new JSONObject();
                 obj.put("errcode", 0);
@@ -74,4 +89,5 @@ public class NativeCode extends CordovaPlugin {
             callbackContext.error("Expected one non-empty string argument.");
         }
     }
+
 }
