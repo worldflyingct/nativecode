@@ -69,7 +69,7 @@ public class NativeCode extends CordovaPlugin {
                 talkback = null;
                 JSONObject obj = new JSONObject();
                 obj.put("errcode", 0);
-                obj.put("errmsg", "success");
+                obj.put("errmsg", "stop success");
                 callbackContext.success(obj);
             } else {
                 JSONObject obj = new JSONObject();
